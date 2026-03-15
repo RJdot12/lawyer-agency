@@ -1,0 +1,98 @@
+---
+import { Image } from 'astro:assets';
+import profitableImg from '../assets/whyus/profitable.png';
+import convenientImg from '../assets/whyus/convenient.png';
+import simpleImg from '../assets/whyus/simple.png';
+import trustworthyImg from '../assets/whyus/trustworthy.png';
+
+const benefits = [
+  {
+    title: "З нами вигідно",
+    description: "Наші тарифи значно нижчі, ніж звичайні разові консультації. Ви економите тисячі гривень протягом року.",
+    image: profitableImg,
+    color: "accent"
+  },
+  {
+    title: "З нами зручно",
+    description: "Підписка на рік – і з Вами завжди команда юристів, готових прийти на допомогу майже в будь-яких життєвих обставинах – навіть у вихідні та на свята.",
+    image: convenientImg,
+    color: "primary"
+  },
+  {
+    title: "З нами просто",
+    description: "Наш підхід базується на вмінні пояснити складні юридичні моменти простими словами та на прозорих форматах обслуговування.",
+    image: simpleImg,
+    color: "secondary"
+  },
+  {
+    title: "З нами надійно",
+    description: "Ми спеціалізуємося на якісному, швидкому, та практичному вирішенні юридичних питань. Ми прагнемо, щоб кожна людина мала доступ до якісних юридичних роз'яснень та порад за справедливою ціною.",
+    image: trustworthyImg,
+    color: "secondary"
+  }
+];
+---
+
+<section id="why-us" class="section bg-white dark:bg-gray-800 overflow-hidden">
+  <div class="container-custom">
+    <!-- Two Column Layout -->
+    <div class="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+      <!-- Left Column: Header -->
+      <div data-animate="fade-in">
+        <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white mb-6 leading-tight">
+          Чому обрати <span class="text-accent-500">нас?</span>
+        </h2>
+        <p class="text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
+          Переваги компанії "Юрист На Плаву", які вирізняють нас з-поміж консультаційних фірм.
+        </p>
+      </div>
+
+      <!-- Right Column: Benefits List -->
+      <div class="space-y-8">
+        {benefits.map((benefit, index) => (
+          <div
+            class="benefit-item flex gap-5"
+            data-animate="fade-in-up"
+            data-delay={index * 150}
+          >
+            <!-- Icon -->
+            <Image
+              src={benefit.image}
+              alt={benefit.title}
+              class="flex-shrink-0 w-14 h-14 rounded-2xl object-cover"
+              width={56}
+              height={56}
+              format="webp"
+            />
+
+            <!-- Content -->
+            <div class="flex-1">
+              <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">
+                {benefit.title}
+              </h3>
+              <p class="text-gray-600 dark:text-gray-400 leading-relaxed">
+                {benefit.description}
+              </p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .benefit-item {
+    padding: 1.25rem;
+    border-radius: 1rem;
+    transition: all 0.3s ease;
+  }
+
+  .benefit-item:hover {
+    background: linear-gradient(to right, rgba(249, 250, 251, 0.8), transparent);
+  }
+
+  :global(.dark) .benefit-item:hover {
+    background: linear-gradient(to right, rgba(18, 29, 60, 0.5), transparent);
+  }
+</style>

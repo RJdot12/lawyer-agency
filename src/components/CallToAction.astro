@@ -1,0 +1,65 @@
+---
+import { Image } from 'astro:assets';
+import ctaImage from '../assets/call-to-action.jpg';
+---
+
+<section id="cta" class="section bg-gray-50 dark:bg-gray-800">
+  <div class="container-custom">
+    <div class="max-w-5xl mx-auto">
+      <div
+        class="cta-block bg-gradient-to-br from-primary-50 to-accent-50 dark:from-primary-900/20 dark:to-accent-900/20 rounded-2xl border-2 border-accent-200 dark:border-accent-800 relative overflow-hidden transition-all duration-300 hover:shadow-xl"
+        data-animate="fade-in-up"
+      >
+        <!-- Decorative elements -->
+        <div class="absolute top-0 right-0 w-40 h-40 bg-accent-200/30 dark:bg-accent-700/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
+        <div class="absolute bottom-0 left-0 w-32 h-32 bg-primary-200/30 dark:bg-primary-700/10 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2"></div>
+
+        <div class="flex flex-col lg:flex-row items-stretch">
+          <!-- Image -->
+          <div class="lg:w-2/5 relative">
+            <div class="h-64 lg:h-full lg:absolute lg:inset-0">
+              <Image
+                src={ctaImage}
+                alt="Юридична консультація"
+                class="w-full h-full object-cover"
+                format="webp"
+              />
+            </div>
+          </div>
+
+          <!-- Content -->
+          <div class="lg:w-3/5 p-8 md:p-10 lg:p-12 relative z-10">
+            <h3 class="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-4">
+              Приєднуйтесь до нашої юридичної родини!
+            </h3>
+            <p class="text-gray-600 dark:text-gray-300 mb-8 text-lg">
+              Фахівці нашої компанії допомогли вже багатьом людям захистити свої законні права в безлічі життєвих ситуацій. Запрошуємо до плідної співпраці і Вас!
+            </p>
+            <div class="flex flex-wrap gap-4">
+              <a href="#how-to-start" class="btn-primary text-base px-6 py-3">
+                Стати клієнтом
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2" viewBox="0 0 20 20" fill="currentColor">
+                  <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd"/>
+                </svg>
+              </a>
+              <a href="/pricing" class="btn-ghost text-base px-6 py-3">
+                Обрати підписку
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .cta-block:hover {
+    border-color: var(--color-accent-400);
+    transform: translateY(-3px);
+  }
+
+  :global(.dark) .cta-block:hover {
+    border-color: var(--color-accent-600);
+  }
+</style>

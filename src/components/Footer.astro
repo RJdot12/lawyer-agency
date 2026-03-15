@@ -1,0 +1,150 @@
+---
+import { Image } from 'astro:assets';
+import { socialLinks, contactInfo } from '../config/socials';
+import logoCircle from '../assets/logo-circle.png';
+
+// Social icons
+import phoneIcon from '../assets/social/phone.png';
+import emailIcon from '../assets/social/email.png';
+import facebookIcon from '../assets/social/facebook.png';
+import instagramIcon from '../assets/social/instagram.png';
+import telegramIcon from '../assets/social/telegram.png';
+import whatsappIcon from '../assets/social/whatsapp.png';
+import tiktokIcon from '../assets/social/tiktok.png';
+import viberIcon from '../assets/social/viber.png';
+
+const currentYear = new Date().getFullYear();
+
+const navLinks = [
+  { text: "Головна", url: "/" },
+  { text: "Послуги", url: "/services" },
+  { text: "Підписки", url: "/pricing" },
+  { text: "Наші кейси", url: "/case-study" },
+  { text: "Спитати в нас", url: "/contact" },
+  { text: "FAQ", url: "/faqs" },
+  { text: "Публічна оферта", url: "/privacy-policy" }
+];
+---
+
+<footer class="relative bg-gradient-to-b from-white to-primary-50 dark:from-gray-900 dark:to-primary-950 pt-16 pb-8 border-t border-accent-200 dark:border-accent-800/50">
+  <!-- Decorative accent line at top -->
+  <div class="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-accent-500 to-transparent"></div>
+
+  <div class="container-custom">
+    <!-- Main footer content -->
+    <div class="flex flex-col lg:flex-row justify-between items-start gap-12 mb-12">
+
+      <!-- Brand section -->
+      <div class="max-w-sm">
+        <a href="/" class="inline-flex items-center mb-5 group" aria-label="Перейти на головну">
+          <Image
+            src={logoCircle}
+            alt="Логотип Юрист На Плаву"
+            class="h-14 w-auto rounded-sm object-contain transition-transform group-hover:scale-105"
+            loading="lazy"
+            format="webp"
+          />
+          <span class="ml-3 text-xl font-display font-semibold text-gray-900 dark:text-white">
+            Юрист На Плаву
+          </span>
+        </a>
+        <p class="text-gray-600 dark:text-gray-400 leading-relaxed">
+          Доступна якісна юридична допомога з військового, адміністративного, цивільного, сімейного, та інших галузей права.
+        </p>
+      </div>
+
+      <!-- Navigation -->
+      <nav class="flex flex-col sm:flex-row gap-8 sm:gap-12" aria-label="Навігація по сайту">
+        <div class="min-w-[120px]">
+          <h3 class="text-sm font-semibold text-gray-900 dark:text-white uppercase tracking-wider mb-4">
+            Сторінки
+          </h3>
+          <ul class="space-y-3 whitespace-nowrap">
+            {navLinks.map(link => (
+              <li>
+                <a
+                  href={link.url}
+                  class="text-gray-600 dark:text-gray-400 hover:text-accent-600 dark:hover:text-accent-400 transition-colors inline-flex items-center gap-2 group"
+                >
+                  <span class="w-1.5 h-1.5 rounded-full bg-accent-400 opacity-0 group-hover:opacity-100 transition-opacity"></span>
+                  {link.text}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="text-sm font-semibold text-gray-900 dark:text-white uppercase tracking-wider mb-4">
+            Контакти
+          </h3>
+          <div class="space-y-3 mb-5">
+            <a
+              href={`tel:${contactInfo.phone}`}
+              class="flex items-center gap-3 text-gray-600 dark:text-gray-400 hover:text-accent-600 dark:hover:text-accent-400 transition-colors"
+            >
+              <Image src={phoneIcon} alt="Телефон" class="w-10 h-10 object-contain" width={40} height={40} format="webp" />
+              <span>Зателефонувати</span>
+            </a>
+            <a
+              href={`mailto:${contactInfo.email}`}
+              class="flex items-center gap-3 text-gray-600 dark:text-gray-400 hover:text-accent-600 dark:hover:text-accent-400 transition-colors"
+            >
+              <Image src={emailIcon} alt="Пошта" class="w-10 h-10 object-contain" width={40} height={40} format="webp" />
+              <span>{contactInfo.email}</span>
+            </a>
+          </div>
+          <!-- Social icons -->
+          <div class="flex flex-wrap gap-3">
+            <a href={socialLinks.facebook} target="_blank" rel="noopener noreferrer" class="transition-all transform hover:-translate-y-0.5 hover:opacity-80" aria-label="Facebook">
+              <Image src={facebookIcon} alt="Facebook" class="w-10 h-10 object-contain" width={40} height={40} format="webp" />
+            </a>
+            <a href={socialLinks.instagram} target="_blank" rel="noopener noreferrer" class="transition-all transform hover:-translate-y-0.5 hover:opacity-80" aria-label="Instagram">
+              <Image src={instagramIcon} alt="Instagram" class="w-10 h-10 object-contain" width={40} height={40} format="webp" />
+            </a>
+            <a href={socialLinks.telegram} target="_blank" rel="noopener noreferrer" class="transition-all transform hover:-translate-y-0.5 hover:opacity-80" aria-label="Telegram">
+              <Image src={telegramIcon} alt="Telegram" class="w-10 h-10 object-contain" width={40} height={40} format="webp" />
+            </a>
+            <a href={socialLinks.whatsapp} target="_blank" rel="noopener noreferrer" class="transition-all transform hover:-translate-y-0.5 hover:opacity-80" aria-label="WhatsApp">
+              <Image src={whatsappIcon} alt="WhatsApp" class="w-10 h-10 object-contain" width={40} height={40} format="webp" />
+            </a>
+            <a href={socialLinks.tiktok} target="_blank" rel="noopener noreferrer" class="transition-all transform hover:-translate-y-0.5 hover:opacity-80" aria-label="TikTok">
+              <Image src={tiktokIcon} alt="TikTok" class="w-10 h-10 object-contain" width={40} height={40} format="webp" />
+            </a>
+            <a href={socialLinks.viber} target="_blank" rel="noopener noreferrer" class="transition-all transform hover:-translate-y-0.5 hover:opacity-80" aria-label="Viber">
+              <Image src={viberIcon} alt="Viber" class="w-10 h-10 object-contain" width={40} height={40} format="webp" />
+            </a>
+          </div>
+        </div>
+      </nav>
+
+      <!-- CTA section -->
+      <div class="w-full lg:w-auto">
+        <div class="bg-gradient-to-br from-primary-50 to-accent-50 dark:from-primary-900/30 dark:to-accent-900/20 rounded-xl p-6 border border-accent-200 dark:border-accent-800/50">
+          <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">
+            Маєте до нас питання?
+          </h3>
+          <p class="text-sm text-gray-600 dark:text-gray-400 mb-4">
+            Наші спеціалісти якнайшвидше опрацюють Ваш запит та нададуть на нього відповідь.
+          </p>
+          <a href="/contact" class="btn-primary text-sm px-5 py-2.5">
+            Написати нам
+            <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Divider -->
+    <div class="h-px bg-gradient-to-r from-transparent via-gray-300 dark:via-gray-700 to-transparent mb-8"></div>
+
+    <!-- Bottom section -->
+    <div class="flex justify-center items-center">
+      <p class="text-sm text-gray-500 dark:text-gray-500">
+        &copy; {currentYear} Юрист На Плаву. Копіювання матеріалів сайту дозволено лише за посилання на "Юрист На Плаву". Всі права захищені.
+      </p>
+    </div>
+  </div>
+</footer>

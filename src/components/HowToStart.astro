@@ -1,0 +1,246 @@
+---
+import { Image } from 'astro:assets';
+import step1Img from '../assets/steps/step_1.png';
+import step2Img from '../assets/steps/step_2.png';
+import step3Img from '../assets/steps/step_3.png';
+import step4Img from '../assets/steps/step_4.png';
+import step5Img from '../assets/steps/step_5.png';
+
+const stepImages = [step1Img, step2Img, step3Img, step4Img, step5Img];
+
+const steps = [
+  {
+    number: 1,
+    title: "Заповніть форму",
+    description: "Вкажіть свої реєстраційні дані та оберіть бажану підписку у формі на сторінці Контакти.",
+  },
+  {
+    number: 2,
+    title: "Отримайте реквізити",
+    description: "Отримайте наші банківські реквізити для оплати підписки на Ваш номер телефону.",
+  },
+  {
+    number: 3,
+    title: "Здійсніть оплату",
+    description: "Оплатіть обрану підписку і відправте нам квитанцію про оплату (у месенджер чи на електронну пошту).",
+  },
+  {
+    number: 4,
+    title: "Підтвердження",
+    description: "Ми перевіримо оплату та підтвердимо Вашу підписку.",
+  },
+  {
+    number: 5,
+    title: "Готово!",
+    description: "Ви офіційно стаєте нашим клієнтом і одразу отримуєте доступ до юридичних послуг протягом року.",
+  }
+];
+---
+
+<section id="how-to-start" class="how-to-start-section relative overflow-hidden">
+  <!-- Background decorations -->
+  <div class="absolute inset-0 z-0">
+    <div class="absolute top-0 left-1/4 w-96 h-96 bg-accent-400/20 rounded-full blur-3xl"></div>
+    <div class="absolute bottom-0 right-1/4 w-80 h-80 bg-primary-400/20 rounded-full blur-3xl"></div>
+  </div>
+
+  <div class="container-custom relative z-10">
+    <!-- Section Header -->
+    <div class="text-center max-w-3xl mx-auto mb-16">
+      <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">Як стати нашим клієнтом?</h2>
+      <p class="text-primary-100 text-lg">
+        Ми зробили процес максимально простим. Лише 5 кроків — і Ви отримуєте доступ до професійної юридичної підтримки на цілий рік вперед.
+      </p>
+    </div>
+
+    <!-- Timeline Steps -->
+    <div class="timeline-container">
+      <!-- Connecting Line (desktop only) -->
+      <div class="timeline-line"></div>
+
+      <div class="timeline-steps">
+        {steps.map((step, index) => (
+          <div
+            class="timeline-step"
+            data-animate="fade-in-up"
+            data-delay={index * 100}
+          >
+            <!-- Step Number Circle -->
+            <div class="step-circle">
+              <span class="step-number">{step.number}</span>
+            </div>
+
+            <!-- Step Content Card -->
+            <div class="step-content">
+              <div class="step-icon">
+                <Image
+                  src={stepImages[index]}
+                  alt={step.title}
+                  class="w-10 h-10 object-contain"
+                  width={40}
+                  height={40}
+                  format="webp"
+                />
+              </div>
+              <h3 class="step-title">{step.title}</h3>
+              <p class="step-description">{step.description}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <!-- CTA Button -->
+      <div class="text-center mt-12" data-animate="fade-in-up" data-delay="500">
+        <a href="/pricing" class="btn-primary text-base px-8 py-4">
+          Обрати підписку
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .how-to-start-section {
+    padding: 5rem 0;
+    background: linear-gradient(135deg, var(--color-primary-600) 0%, var(--color-primary-800) 50%, var(--color-primary-900) 100%);
+  }
+
+  :global(.dark) .how-to-start-section {
+    background: linear-gradient(135deg, var(--color-primary-800) 0%, var(--color-primary-900) 50%, var(--color-gray-950) 100%);
+  }
+
+  .timeline-container {
+    position: relative;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  .timeline-line {
+    display: none;
+  }
+
+  @media (min-width: 1024px) {
+    .timeline-line {
+      display: block;
+      position: absolute;
+      top: 2rem;
+      left: 2rem;
+      right: 2rem;
+      height: 3px;
+      background: linear-gradient(to right, var(--color-accent-400), var(--color-accent-500), var(--color-accent-400));
+      border-radius: 9999px;
+    }
+  }
+
+  .timeline-steps {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  @media (min-width: 1024px) {
+    .timeline-steps {
+      flex-direction: row;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+  }
+
+  .timeline-step {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  @media (min-width: 1024px) {
+    .timeline-step {
+      flex-direction: column;
+      align-items: center;
+      flex: 1;
+      text-align: center;
+    }
+  }
+
+  .step-circle {
+    flex-shrink: 0;
+    width: 4rem;
+    height: 4rem;
+    background: linear-gradient(135deg, var(--color-accent-400), var(--color-accent-600));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 20px rgba(208, 164, 117, 0.4);
+    position: relative;
+    z-index: 10;
+  }
+
+  .step-number {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: white;
+  }
+
+  .step-content {
+    flex: 1;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 1rem;
+    padding: 1.25rem;
+  }
+
+  @media (min-width: 1024px) {
+    .step-content {
+      margin-top: 1.5rem;
+      padding: 1.5rem 1rem;
+    }
+  }
+
+  .step-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 0.75rem;
+    color: var(--color-accent-300);
+    margin-bottom: 0.75rem;
+  }
+
+  .step-title {
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: white;
+    margin-bottom: 0.5rem;
+  }
+
+  .step-description {
+    font-size: 0.875rem;
+    color: var(--color-primary-100);
+    line-height: 1.5;
+  }
+
+  /* Mobile: vertical connecting line */
+  @media (max-width: 1023px) {
+    .timeline-step:not(:last-child)::before {
+      content: '';
+      position: absolute;
+      left: 2rem;
+      top: 4rem;
+      width: 2px;
+      height: calc(100% + 2rem);
+      background: linear-gradient(to bottom, var(--color-accent-400), var(--color-accent-600));
+      transform: translateX(-50%);
+    }
+
+    .timeline-step {
+      position: relative;
+    }
+  }
+</style>

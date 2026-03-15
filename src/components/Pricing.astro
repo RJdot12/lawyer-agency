@@ -1,0 +1,233 @@
+---
+const plans = [
+    {
+        name: "Базова",
+        price: 600,
+        description: "",
+        features: [
+            "Юридичні консультації з основних правових питань",
+            "Необмежена кількість звернень протягом року",
+            "Консультації телефоном або через онлайн-чат",
+            "Надання коротких письмових відповідей (за запитом)",
+            "Рекомендації щодо складання типових документів (заяви, звернення, скарги)",
+            "Пояснення ваших прав і алгоритму дій у поширених ситуаціях"
+        ],
+        additional: "Кількість користувачів – 1",
+        cta: "Обрати",
+        popular: false,
+        color: "secondary"
+    },
+    {
+        name: "Преміум",
+        price: 800,
+        description: "Всі послуги з Базової підписки плюс:",
+        features: [
+            "Підготовка документів на ваш вибір, серед яких:" +
+            "1) позовна заява, відзив, пояснення для суду, апеляційна скарга, касаційна скарга (2 шт.)" +
+            "2) клопотання, заява, скарга (5 шт.)"
+        ],
+        additional: "Кількість користувачів – 1",
+        cta: "Обрати",
+        popular: true,
+        color: "accent"
+    },
+    {
+        name: "Студентська (18-25 р.)",
+        price: 500,
+        description: "Всі послуги з Базової підписки плюс:",
+        features: [
+            "Підготовка документів на ваш вибір, серед яких:" +
+            "1) позовна заява, відзив, пояснення для суду, апеляційна скарга, касаційна скарга (2 шт.)" +
+            "2) клопотання, заява, скарга (5 шт.)"
+        ],
+        additional: "Кількість користувачів – 1",
+        cta: "Обрати",
+        popular: false,
+        color: "primary"
+    },
+    {
+        name: "Сімейна",
+        price: 2000,
+        description: "Всі послуги з Базової підписки плюс:",
+        features: [
+            "Підготовка документів на ваш вибір, серед яких:" +
+            "1) позовна заява, відзив, пояснення для суду, апеляційна скарга, касаційна скарга (2 шт.)" +
+            "2) клопотання, заява, скарга (5 шт.)"
+        ],
+        additional: "Кількість користувачів – 4",
+        cta: "Обрати",
+        popular: false,
+        color: "primary"
+    },
+    {
+        name: "Індивідуальний документ",
+        price: 400,
+        description: "",
+        features: [
+            "Разова послуга без консультації",
+            "Підготовка документів:\n" +
+            "позовна заява; \n" +
+            "відзив; \n" +
+            "пояснення для суду; \n" +
+            "апеляційна скарга; касаційна скарга; \n" +
+            "заява про видачу судового наказу; \n" +
+            "скарга."
+        ],
+        additional: "Кількість користувачів – 1",
+        cta: "Обрати",
+        popular: false,
+        color: "primary",
+        yearly: false
+    }
+];
+
+function parseFeatureString(input) {
+  if (typeof input !== 'string') return null;
+  const s = input.trim();
+
+  // Determine title and the remaining text after the title
+  let title = '';
+  let rest = '';
+  const colonIdx = s.indexOf(':');
+  if (colonIdx !== -1) {
+    title = s.slice(0, colonIdx + 1).trim();
+    rest = s.slice(colonIdx + 1).trim();
+  } else if (s.includes('\n')) {
+    const [first, ...others] = s.split(/\n+/);
+    title = first.trim().replace(/[;,.]+$/, '');
+    rest = others.join('\n').trim();
+  } else {
+    return null;
+  }
+
+  // Build sub-items from different possible formats
+  const subItems = [];
+
+  // Case 1: numbered items like `1) ... 2) ...`
+  if (/\d+\)\s*/.test(rest)) {
+    rest
+      .split(/\d+\)\s*/)
+      .filter(Boolean)
+      .map((x) => x.trim())
+      .forEach((x) => subItems.push(x));
+  }
+
+  // Case 2: newline-separated
+  if (rest.includes('\n')) {
+    rest
+      .split(/\n+/)
+      .forEach((chunk) => {
+        chunk
+          .split(/;+/)
+          .map((x) => x.trim())
+          .forEach((x) => subItems.push(x));
+      });
+  }
+
+  // Case 3: semicolon-separated (even if no newlines)
+  if (subItems.length === 0 && rest.includes(';')) {
+    rest
+      .split(/;+/)
+      .map((x) => x.trim())
+      .forEach((x) => subItems.push(x));
+  }
+
+  // Cleanup bullets, leading dashes and trailing punctuation/whitespace
+  const cleaned = subItems
+    .map((x) => x.replace(/^[–\-•\*\d\)\s]+/, '').replace(/[;.,\s]+$/, '').trim())
+    .filter(Boolean);
+
+  if (cleaned.length === 0) return null;
+
+  return { title, subItems: cleaned };
+}
+
+function nobreakParenthesesAndUnits(text) {
+  if (typeof text !== 'string') return text;
+  let res = text;
+  // Prevent breaks inside parentheses by turning inner spaces into NBSP
+  res = res.replace(/\(([^)]+)\)/g, (_, inner) => `(${inner.replace(/\s+/g, '\u00A0')})`);
+  // Keep numbers with units together (e.g., "2 шт.", "500 грн", "18-25 р.")
+  res = res.replace(/(\d+[\-\d]*)\s+([A-Za-zА-Яа-яІіЇїЄє\.]+)\b/g, '$1\u00A0$2');
+  return res;
+}
+---
+
+<section id="pricing" class="section bg-secondary-50 dark:bg-gray-800">
+    <div class="w-full mx-auto px-8 sm:px-10 md:px-16 lg:px-20 xl:px-32">
+        <div class="grid md:grid-cols-3 items-stretch gap-4 sm:gap-5 lg:gap-10">
+            {plans.map((plan, index) => (
+                    <div
+                            class={`card h-full flex flex-col p-6 border ${plan.popular ? `border-${plan.color}-500 dark:border-${plan.color}-400 ring-2 ring-accent-400` : 'border-secondary-200 dark:border-secondary-800'} slide-up relative transition-transform duration-300 hover:-translate-y-1`}
+                            style={`animation-delay: ${index * 150}ms`}
+                    >
+                        {plan.popular && (
+                                <div class={`absolute top-3 right-3 bg-accent-500 text-white px-3 py-1 text-xs uppercase tracking-wide font-semibold rounded-full shadow-sm`}>
+                                    Найпопулярніша
+                                </div>
+                        )}
+
+                        <div class={`h-1 w-12 rounded-full bg-${plan.color}-500/80 mb-4`}></div>
+
+                        <div class="flex-1">
+                            <h3 class="text-xl font-semibold mb-2 text-gray-900 dark:text-white">{plan.name}</h3>
+                            <div class="mb-4 flex items-baseline gap-2">
+                                <span class="text-5xl font-bold tracking-tight text-gray-900 dark:text-white">{plan.price}</span>
+                                <span class="inline-flex items-baseline">
+                                    <span class="text-lg font-semibold text-gray-900 dark:text-white">грн</span>{plan.yearly !== false && <span class="text-sm text-gray-500 dark:text-gray-400">/рік</span>}
+                                </span>
+                            </div>
+
+                            {plan.description && (
+                                <p class="text-gray-600 dark:text-gray-300 mb-6 italic font-semibold text-base md:text-base text-pretty">{nobreakParenthesesAndUnits(plan.description)}</p>
+                            )}
+
+                            <ul class="space-y-3 mb-6">
+                                {plan.features.map(feature => {
+                                    const parsed = parseFeatureString(feature);
+                                    return (
+                                        <li class="flex items-start">
+                                            <svg class={`w-5 h-5 text-${plan.color}-500 mr-2 shrink-0 mt-0.5`}
+                                                 fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                                <path fill-rule="evenodd"
+                                                      d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                                                      clip-rule="evenodd"></path>
+                                            </svg>
+                                            <div class="text-gray-600 dark:text-gray-300">
+                                                {parsed ? (
+                                                    <div>
+                                                        <span class="font-semibold">{parsed.title}</span>
+                                                        <div class="mt-2 ml-1 pl-4 border-l-2 border-secondary-200 dark:border-secondary-700">
+                                                            <ul class="list-disc marker:text-secondary-600 dark:marker:text-secondary-400 space-y-1.5 ml-3 text-[0.95rem]">
+                                                                {parsed.subItems.map((item) => (
+                                                                    <li class="leading-snug text-pretty"><span>{nobreakParenthesesAndUnits(item)}</span></li>
+                                                                ))}
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                ) : (
+                                                    <span class="whitespace-pre-line">{nobreakParenthesesAndUnits(feature)}</span>
+                                                )}
+                                            </div>
+                                        </li>
+                                    );
+                                })}
+                            </ul>
+                        </div>
+
+                        <div class="mt-auto pt-6 border-t border-secondary-200 dark:border-secondary-800">
+                            {plan.additional && (
+                                <p class="text-sm text-gray-600 dark:text-gray-300 mb-4 font-medium text-center">{plan.additional}</p>
+                            )}
+                            <a
+                                    href="/contact"
+                                    class={`w-full btn ${plan.popular ? `bg-accent-500 hover:bg-accent-700 text-white focus:ring-accent-500` : 'btn-outline'}`}
+                            >
+                                {plan.cta}
+                            </a>
+                        </div>
+                    </div>
+            ))}
+        </div>
+    </div>
+</section>

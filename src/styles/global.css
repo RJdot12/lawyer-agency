@@ -1,0 +1,242 @@
+@import 'tailwindcss';
+
+@custom-variant dark (&:is(.dark *));
+
+@theme {
+    /* PRIMARY COLOR (Dark Blue) - RGB(30, 55, 110) - #1e376e */
+    --color-primary-50: #d8dfe8;
+    --color-primary-100: #b8c4d6;
+    --color-primary-200: #8fa2be;
+    --color-primary-300: #6478a0;
+    --color-primary-400: #3d5285;
+    --color-primary-500: #1e376e;
+    --color-primary-600: #162b5a;
+    --color-primary-700: #0f2048;
+    --color-primary-800: #081638;
+    --color-primary-900: #030d28;
+    --color-primary-950: #010818;
+
+    /* SECONDARY COLOR (Light Blue) - RGB(217, 230, 243) - #d9e6f3 */
+    --color-secondary-50: #f0f1f3;
+    --color-secondary-100: #edf0f3;
+    --color-secondary-200: #ebeff3;
+    --color-secondary-300: #e6ecf3;
+    --color-secondary-400: #e0e9f3;
+    --color-secondary-500: #d9e6f3;
+    --color-secondary-600: #b6c2ce;
+    --color-secondary-700: #949faa;
+    --color-secondary-800: #737c85;
+    --color-secondary-900: #525961;
+    --color-secondary-950: #33373c;
+
+    /* ACCENT COLOR (Gold/Tan) - RGB(208, 164, 117) - #d0a475 */
+    --color-accent-50: #f2ede7;
+    --color-accent-100: #e5dbd1;
+    --color-accent-200: #d0c2b4;
+    --color-accent-300: #d0baa2;
+    --color-accent-400: #d0b190;
+    --color-accent-500: #d0a475;
+    --color-accent-600: #b0875b;
+    --color-accent-700: #916c45;
+    --color-accent-800: #725231;
+    --color-accent-900: #533a20;
+    --color-accent-950: #342311;
+
+    /* WARNING COLOR (Coral Red) - RGB(220, 85, 65) - #dc5541 */
+    --color-warning-50: #f2e3e1;
+    --color-warning-100: #e5c9c5;
+    --color-warning-200: #dcb3ad;
+    --color-warning-300: #dc988e;
+    --color-warning-400: #dc7d6f;
+    --color-warning-500: #dc5441;
+    --color-warning-600: #bb3c2a;
+    --color-warning-700: #9a2817;
+    --color-warning-800: #79180a;
+    --color-warning-900: #580c01;
+    --color-warning-950: #370700;
+
+    --font-sans: Inter, system-ui, sans-serif;
+    --font-display: Lexend, system-ui, sans-serif;
+
+    --animate-fade-in: fadeIn 0.5s ease-in-out;
+    --animate-slide-up: slideUp 0.5s ease-in-out;
+    --animate-slide-down: slideDown 0.5s ease-in-out;
+
+    @keyframes fadeIn {
+        0% {
+            opacity: 0;
+        }
+        100% {
+            opacity: 1;
+        }
+    }
+    @keyframes slideUp {
+        0% {
+            transform: translateY(20px);
+            opacity: 0;
+        }
+        100% {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    }
+    @keyframes slideDown {
+        0% {
+            transform: translateY(-20px);
+            opacity: 0;
+        }
+        100% {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    }
+}
+
+/* Dark theme: deep navy/indigo palette overrides */
+.dark {
+    --color-gray-950: #0b0e20;
+    --color-gray-900: #0f162e;
+    --color-gray-800: #101832;
+    --color-gray-700: #282c42;
+    --color-gray-600: #36393f;
+    --color-gray-500: #6b7186;
+    --color-gray-400: #9ba1b0;
+    --color-gray-300: #c8cdd8;
+    --color-gray-200: #d0d4de;
+    --color-gray-100: #dce0e8;
+    --color-gray-50: #e0e2e8;
+
+    --color-secondary-950: #0b0e20;
+    --color-secondary-900: #282c42;
+    --color-secondary-800: #16244b;
+    --color-secondary-700: #282c42;
+    --color-secondary-200: #a8adb8;
+    --color-secondary-100: #d0d4de;
+    --color-secondary-50: #e0e2e8;
+}
+
+/*
+  The default border color has changed to `currentcolor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+@layer base {
+    *,
+    ::after,
+    ::before,
+    ::backdrop,
+    ::file-selector-button {
+        border-color: var(--color-gray-200, currentcolor);
+    }
+}
+
+@utility btn {
+    @apply inline-flex items-center justify-center px-6 py-3 rounded-lg font-medium transition-all duration-300 focus:outline-hidden;
+}
+
+@utility btn-primary {
+    @apply btn bg-accent-400 hover:bg-accent-500 text-black shadow-md hover:shadow-lg;
+}
+
+@utility btn-secondary {
+    @apply btn bg-primary-600 hover:bg-primary-700 text-white shadow-md hover:shadow-lg;
+}
+
+@utility btn-accent {
+    @apply btn bg-accent-500 hover:bg-accent-600 text-black shadow-md hover:shadow-lg;
+}
+
+@utility btn-outline {
+    @apply btn border-2 border-secondary-300 dark:border-secondary-700 hover:bg-secondary-100 dark:hover:bg-secondary-800 text-secondary-900 dark:text-secondary-100;
+}
+
+@utility btn-ghost {
+    @apply btn bg-primary-600/10 hover:bg-primary-600/20 text-primary-700 dark:bg-primary-400/15 dark:hover:bg-primary-400/25 dark:text-primary-200 border border-primary-600/20 dark:border-primary-400/30;
+}
+
+@utility container-custom {
+    @apply container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl;
+}
+
+@utility section {
+    @apply py-12 md:py-16;
+}
+
+@utility section-after-hero {
+    @apply pt-8 md:pt-12 pb-12 md:pb-16;
+}
+
+@utility card {
+    @apply bg-white dark:bg-secondary-900 rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300 overflow-hidden border border-secondary-200 dark:border-secondary-800;
+}
+
+@layer base {
+    h1, h2, h3, h4, h5, h6 {
+        @apply font-display;
+    }
+
+    h1 {
+        @apply text-4xl md:text-5xl lg:text-6xl font-bold;
+    }
+
+    h2 {
+        @apply text-3xl md:text-4xl font-bold;
+    }
+
+    h3 {
+        @apply text-2xl md:text-3xl font-semibold;
+    }
+
+    h4 {
+        @apply text-xl md:text-2xl font-semibold;
+    }
+
+    p {
+        @apply text-base md:text-lg leading-relaxed;
+    }
+}
+
+/* Animations */
+.fade-in {
+    @apply animate-fade-in;
+}
+
+.slide-up {
+    @apply animate-slide-up;
+}
+
+.slide-down {
+    @apply animate-slide-down;
+}
+
+/* Accessibility */
+.sr-only {
+    @apply absolute w-px h-px p-0 -m-px overflow-hidden whitespace-nowrap border-0;
+}
+
+/* Focus styles for keyboard navigation */
+:focus-visible {
+    @apply outline-hidden ring-2 ring-primary-500 dark:ring-primary-400;
+}
+
+/* Top banner layout adjustments */
+.has-banner #site-header {
+    top: 52px;
+}
+
+.has-banner #page-wrapper {
+    padding-top: 52px;
+}
+
+@media (min-width: 640px) {
+    .has-banner #site-header {
+        top: 40px;
+    }
+
+    .has-banner #page-wrapper {
+        padding-top: 40px;
+    }
+}

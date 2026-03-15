@@ -1,0 +1,145 @@
+---
+import { Image } from 'astro:assets';
+import logoCircle from '../assets/logo-circle.png';
+
+const navLinks = [
+  { label: "Головна", href: "/" },
+  { label: "Послуги", href: "/services" },
+  { label: "Підписки", href: "/pricing" },
+  { label: "Наші кейси", href: "/case-study" },
+  { label: "FAQ", href: "/faqs" },
+];
+---
+<header id="site-header" class="fixed inset-x-0 top-0 z-50">
+  <!-- Inner bar we can restyle on scroll -->
+  <div id="header-inner" class="transition-all duration-300 bg-gradient-to-b from-black/40 to-transparent text-white">
+    <div class="container-custom h-16 md:h-20 flex items-center justify-between">
+      <!-- Brand -->
+      <a href="/" class="flex items-center gap-3" aria-label="На головну">
+        <Image src={logoCircle} alt="Логотип Юрист На Плаву" class="h-12 w-auto md:h-14 rounded-sm object-contain" loading="eager" format="webp" />
+        <span class="text-lg md:text-xl font-display font-semibold text-white dark:text-white tracking-tight">Юрист На Плаву</span>
+      </a>
+
+      <!-- Desktop nav -->
+      <nav class="hidden md:flex items-center gap-6 lg:gap-8" aria-label="Головна навігація">
+        {navLinks.map((link) => (
+          <a href={link.href} class="font-medium text-white/90 hover:text-accent-400 dark:text-secondary-200 dark:hover:text-accent-400 transition-colors">
+            {link.label}
+          </a>
+        ))}
+
+        <a href="/contact" class="btn-primary px-5 py-2 rounded-xl shadow-md shadow-accent-500/20" aria-label="Отримати консультацію">
+          Стати клієнтом
+        </a>
+      </nav>
+
+      <!-- Actions: theme + mobile menu -->
+      <div class="flex items-center gap-2">
+        <button id="theme-toggle" aria-pressed="false" class="p-2 rounded-full text-white/90 hover:text-accent-400 dark:text-secondary-300 dark:hover:text-white focus:outline-hidden focus:ring-2 focus:ring-primary-500" aria-label="Перемкнути тему">
+          <svg data-icon="sun" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v2m0 14v2m7-9h2M3 12H1m15.364 6.364l1.414 1.414M6.343 6.343L4.929 4.929m12.728 0l1.414 1.414M6.343 17.657l-1.414 1.414M12 8a4 4 0 100 8 4 4 0 000-8z" />
+          </svg>
+          <svg data-icon="moon" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+          </svg>
+        </button>
+
+        <!-- Mobile hamburger -->
+        <button id="menu-toggle" class="md:hidden p-2 rounded-md text-white/90 hover:text-accent-400 dark:text-secondary-200 dark:hover:text-white focus:outline-hidden focus:ring-2 focus:ring-primary-500" aria-label="Меню" aria-controls="mobile-menu" aria-expanded="false">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mobile menu overlay -->
+  <div id="mobile-menu" class="fixed inset-0 z-40 hidden">
+    <div id="mobile-overlay" class="absolute inset-0 bg-black/40 backdrop-blur-[2px]"></div>
+    <div class="relative z-10 mx-4 mt-24 rounded-2xl p-6 bg-white/90 dark:bg-secondary-900/95 backdrop-blur-lg ring-1 ring-black/10 dark:ring-white/10 shadow-xl">
+      <div class="flex items-center justify-between mb-4">
+        <span class="text-sm font-medium text-gray-900 dark:text-white">Меню</span>
+        <button id="mobile-close" class="p-2 rounded-md hover:bg-secondary-100 dark:hover:bg-secondary-800" aria-label="Закрити меню">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 18L18 6M6 6l12 12"/></svg>
+        </button>
+      </div>
+      <nav class="grid gap-2" aria-label="Мобільна навігація">
+        {navLinks.map((link) => (
+          <a href={link.href} class="px-4 py-3 rounded-lg text-base font-medium text-secondary-800 dark:text-secondary-100 hover:bg-secondary-100 dark:hover:bg-secondary-800">
+            {link.label}
+          </a>
+        ))}
+        <a href="/contact" class="btn-primary mt-4 rounded-xl justify-center">Стати клієнтом</a>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<style>
+  /* Dark mode support for inline SVG parts */
+  @media (prefers-color-scheme: dark) {
+    .dark\:fill-slate-800 { fill: #1e293b; }
+    .dark\:fill-slate-600 { fill: #475569; }
+    .dark\:fill-slate-500 { fill: #64748b; }
+    .dark\:fill-slate-700 { fill: #334155; }
+    .dark\:stroke-slate-300 { stroke: #cbd5e1; }
+    .dark\:stroke-teal-500 { stroke: #14b8a6; }
+    .dark\:fill-white { fill: #ffffff; }
+  }
+
+  header a:hover svg {
+    transform: scale(1.04);
+    transition: transform 0.25s ease;
+  }
+</style>
+
+<script>
+  function initMobileMenu() {
+    const toggle = document.getElementById('menu-toggle');
+    const menu = document.getElementById('mobile-menu');
+    const overlay = document.getElementById('mobile-overlay');
+    const closeBtn = document.getElementById('mobile-close');
+
+    if (!toggle || !menu) return;
+
+    const openMenu = () => {
+      menu.classList.remove('hidden');
+      toggle.setAttribute('aria-expanded', 'true');
+      document.body.style.overflow = 'hidden';
+      const first = menu.querySelector('a, button');
+      if (first) (first as HTMLElement).focus();
+    };
+
+    const closeMenu = () => {
+      menu.classList.add('hidden');
+      toggle.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+      toggle.focus();
+    };
+
+    // Remove old listeners by cloning elements
+    const newToggle = toggle.cloneNode(true);
+    toggle.parentNode?.replaceChild(newToggle, toggle);
+
+    newToggle.addEventListener('click', () => {
+      if (menu.classList.contains('hidden')) openMenu();
+      else closeMenu();
+    });
+
+    if (overlay) {
+      const newOverlay = overlay.cloneNode(true);
+      overlay.parentNode?.replaceChild(newOverlay, overlay);
+      newOverlay.addEventListener('click', closeMenu);
+    }
+
+    if (closeBtn) {
+      const newCloseBtn = closeBtn.cloneNode(true);
+      closeBtn.parentNode?.replaceChild(newCloseBtn, closeBtn);
+      newCloseBtn.addEventListener('click', closeMenu);
+    }
+  }
+
+  // Run on initial load and after every navigation
+  document.addEventListener('astro:page-load', initMobileMenu);
+</script>

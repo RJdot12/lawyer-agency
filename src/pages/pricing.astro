@@ -1,0 +1,21 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import PricingCmp from '../components/Pricing.astro';
+import Footer from '../components/Footer.astro';
+import HeroSection from '../components/HeroSection.astro';
+---
+
+<Layout title="Pricing - SaaSify">
+  <Header />
+  <main>
+    <HeroSection
+      title="Прості та зрозумілі тарифи"
+      highlightText="тарифи"
+      description="Виберіть план, який найкраще підходить для Вас!"
+      compact={true}
+    />
+    <PricingCmp />
+  </main>
+  <Footer />
+</Layout>

@@ -1,0 +1,280 @@
+---
+import { Image } from 'astro:assets';
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import HeroSection from '../components/HeroSection.astro';
+import CaseBlock from '../components/CaseBlock.astro';
+import {getCollection} from 'astro:content';
+import contactsImg from '../assets/contacts.jpg';
+
+// Get first 5 cases for initial render
+const allCases = await getCollection('cases');
+const sortedCases = allCases.sort((a, b) => a.data.order - b.data.order);
+const initialCases = sortedCases.slice(0, 5);
+const totalCases = sortedCases.length;
+const hasMoreCases = totalCases > 5;
+---
+
+<Layout title="Наші кейси - Юрист На Плаву">
+    <Header/>
+    <main>
+        <HeroSection
+                title="Успішно вирішені справи"
+                highlightText="справи"
+                description="Команда «Юриста На Плаву» пишається результатами продуктивної взаємодії зі всіма нашими клієнтами."
+                compact={true}
+        />
+
+        <section class="section-after-hero bg-white dark:bg-gray-800">
+            <div class="container-custom">
+                <!-- Cases List -->
+                <div id="cases-list" class="space-y-8">
+                    {initialCases.map((caseEntry, index) => (
+                            <CaseBlock
+                                    title={caseEntry.data.title}
+                                    category={caseEntry.data.category}
+                                    image={caseEntry.data.image}
+                                    imageAlt={caseEntry.data.imageAlt}
+                                    brief={caseEntry.data.brief}
+                                    slug={caseEntry.id.replace('.md', '')}
+                                    index={index}
+                                    reverse={index % 2 === 1}
+                            />
+                    ))}
+                </div>
+
+                <!-- Load More Button -->
+                {hasMoreCases && (
+                        <div id="load-more-container" class="mt-12 text-center"
+                             x-data={`{ loading: false, hasMore: true, loadedCount: 5, totalCases: ${totalCases} }`}>
+                            <button
+                                    x-show="hasMore"
+                                    x-on:click="loadMoreCases($data)"
+                                    x-bind:disabled="loading"
+                                    class="btn-primary"
+                            >
+              <span x-show="!loading" class="flex items-center gap-2">
+                Завантажити ще кейси
+                <span class="text-sm opacity-80" x-text="`(${totalCases - loadedCount})`"></span>
+              </span>
+                                <span x-show="loading" class="inline-flex items-center">
+                <svg class="animate-spin -ml-1 mr-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none"
+                     viewBox="0 0 24 24">
+                  <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                  <path class="opacity-75" fill="currentColor"
+                        d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                </svg>
+                Завантаження...
+              </span>
+                                <svg
+                                        x-show="!loading"
+                                        class="w-5 h-5 ml-2 transform transition-transform duration-300 group-hover:translate-y-1"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        viewBox="0 0 24 24"
+                                >
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                          d="M19 9l-7 7-7-7"></path>
+                                </svg>
+                            </button>
+                        </div>
+                )}
+
+                <!-- CTA Section -->
+                <div class="mt-16 max-w-6xl mx-auto">
+                    <div class="cta-block bg-gradient-to-br from-primary-50 to-accent-50 dark:from-primary-900/20 dark:to-accent-900/20 rounded-2xl border-2 border-accent-200 dark:border-accent-800 relative overflow-hidden transition-all duration-300 hover:shadow-xl">
+                        <div class="flex flex-col lg:flex-row items-stretch">
+                            <!-- Image -->
+                            <div class="lg:w-1/2 relative">
+                                <div class="h-72 lg:h-full lg:absolute lg:inset-0">
+                                    <Image
+                                        src={contactsImg}
+                                        alt="Зв'яжіться з нами"
+                                        class="w-full h-full object-cover"
+                                        format="webp"
+                                    />
+                                </div>
+                            </div>
+
+                            <!-- Content -->
+                            <div class="lg:w-1/2 p-8 md:p-10 lg:p-12 relative z-10">
+                                <h3 class="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-4">Опинились у схожій ситуації?</h3>
+                                <p class="text-gray-600 dark:text-gray-300 mb-8 text-lg">
+                                    Ми завжди поруч, коли Ви не знаєте, що робити, або яку правову норму коректно застосувати.
+                                </p>
+                                <div class="flex flex-wrap gap-4">
+                                    <a href="/pricing" class="btn-primary text-base px-6 py-3">
+                                        Обрати підписку
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2" viewBox="0 0 20 20"
+                                             fill="currentColor">
+                                            <path fill-rule="evenodd"
+                                                  d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z"
+                                                  clip-rule="evenodd"/>
+                                        </svg>
+                                    </a>
+                                    <a href="/contact" class="btn-ghost text-base px-6 py-3">
+                                        Зв'язатися з нами
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <Footer/>
+</Layout>
+
+<script>
+    // Cache for loaded cases
+    let casesCache: any[] | null = null;
+
+    // Function to fetch all cases (with caching)
+    async function fetchAllCases(): Promise<any[]> {
+        if (casesCache) {
+            return casesCache;
+        }
+
+        try {
+            const response = await fetch('/api/cases.json');
+            if (!response.ok) {
+                throw new Error('Failed to fetch cases');
+            }
+            casesCache = await response.json();
+            return casesCache!;
+        } catch (error) {
+            console.error('Error fetching cases:', error);
+            return [];
+        }
+    }
+
+    // Function to create a case block HTML
+    function createCaseBlockHTML(caseData: any, index: number, globalIndex: number): string {
+        const reverse = globalIndex % 2 === 1;
+
+        return `
+      <div
+        class="case-block card p-6 md:p-8 border-2 hover:shadow-xl transition-all duration-300 opacity-0"
+        style="animation: fadeInUp 0.5s ease-out ${index * 100}ms forwards;"
+      >
+        <div class="grid md:grid-cols-2 gap-6 md:gap-8 items-center">
+          <!-- Content -->
+          <div class="${reverse ? 'md:order-2' : 'md:order-1'}">
+            <span class="inline-block px-3 py-1 rounded-full bg-accent-100 dark:bg-accent-900/50 text-accent-700 dark:text-accent-300 text-sm font-medium mb-4">
+              ${caseData.category}
+            </span>
+
+            <h3 class="text-xl md:text-2xl font-bold text-gray-900 dark:text-white mb-4">
+              ${caseData.title}
+            </h3>
+
+            <p class="text-gray-600 dark:text-gray-300 mb-6 leading-relaxed">
+              ${caseData.brief}
+            </p>
+
+            <a href="/cases/${caseData.slug}" class="btn-primary">
+              Детальніше про кейс
+              <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+              </svg>
+            </a>
+          </div>
+
+          <!-- Image -->
+          <div class="${reverse ? 'md:order-1' : 'md:order-2'}">
+            <div class="rounded-xl overflow-hidden">
+              <img
+                src="${caseData.image}"
+                alt="${caseData.imageAlt}"
+                class="w-full h-56 md:h-72 object-cover hover:scale-105 transition-transform duration-500"
+                loading="lazy"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    `;
+    }
+
+    // Make loadMoreCases available globally for Alpine.js
+    (window as any).loadMoreCases = async function (data: any) {
+        if (data.loading || !data.hasMore) return;
+
+        data.loading = true;
+
+        try {
+            const allCases = await fetchAllCases();
+            const nextBatch = allCases.slice(data.loadedCount, data.loadedCount + 5);
+
+            if (nextBatch.length > 0) {
+                const list = document.getElementById('cases-list');
+                if (list) {
+                    nextBatch.forEach((caseData, index) => {
+                        const globalIndex = data.loadedCount + index;
+                        const blockHTML = createCaseBlockHTML(caseData, index, globalIndex);
+                        list.insertAdjacentHTML('beforeend', blockHTML);
+                    });
+                }
+
+                data.loadedCount += nextBatch.length;
+            }
+
+            // Check if there are more cases to load
+            if (data.loadedCount >= data.totalCases) {
+                data.hasMore = false;
+            }
+        } catch (error) {
+            console.error('Error loading more cases:', error);
+        } finally {
+            data.loading = false;
+        }
+    };
+
+    // Reset cache on page navigation (for View Transitions)
+    document.addEventListener('astro:before-swap', () => {
+        casesCache = null;
+    });
+</script>
+
+<style>
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .case-block {
+        border-color: var(--color-accent-200);
+        background: linear-gradient(to bottom right, rgba(255, 255, 255, 0.95), rgba(249, 250, 251, 0.95));
+    }
+
+    :global(.dark) .case-block {
+        border-color: var(--color-accent-800);
+        background: var(--color-secondary-900);
+    }
+
+    .case-block:hover {
+        border-color: var(--color-accent-500);
+        transform: translateY(-4px);
+    }
+
+    :global(.dark) .case-block:hover {
+        border-color: var(--color-accent-600);
+    }
+
+    .cta-block:hover {
+        border-color: var(--color-accent-400);
+        transform: translateY(-3px);
+    }
+
+    :global(.dark) .cta-block:hover {
+        border-color: var(--color-accent-600);
+    }
+</style>

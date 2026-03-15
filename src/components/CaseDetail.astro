@@ -1,0 +1,138 @@
+---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
+interface Props {
+    title: string;
+    category: string;
+    image: ImageMetadata;
+    imageAlt?: string;
+    situation: string;
+    actions: string;
+    result: string;
+    caseNumber?: string;
+    courtLink?: string;
+}
+
+const {
+    title,
+    category,
+    image,
+    imageAlt = "Зображення кейсу",
+    situation,
+    actions,
+    result,
+    caseNumber,
+    courtLink
+} = Astro.props;
+---
+
+<section class="py-16 bg-white dark:bg-gray-800">
+    <div class="container-custom">
+        <div class="max-w-4xl mx-auto">
+            <!-- Header -->
+            <div class="mb-8" data-animate="fade-in">
+        <span class="inline-block px-3 py-1 rounded-full bg-primary-100 dark:bg-primary-900/50 text-primary-700 dark:text-primary-300 text-sm font-medium mb-4">
+          {category}
+        </span>
+                <h1 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white">
+                    {title}
+                </h1>
+                {caseNumber && (
+                        <p class="text-gray-500 dark:text-gray-400 mt-2">{caseNumber}</p>
+                )}
+                {courtLink && (
+                        <a
+                                href={courtLink}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="inline-flex items-center text-primary-600 dark:text-primary-400 hover:underline mt-3 text-sm"
+                        >
+                            <svg class="w-4 h-4 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                      d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                            </svg>
+                            Ця справа в реєстрі судових рішень
+                        </a>
+                )}
+            </div>
+
+            <!-- Image -->
+            <div class="rounded-xl overflow-hidden mb-12" data-animate="fade-in" data-delay="100">
+                <Image
+                        src={image}
+                        alt={imageAlt}
+                        class="w-full h-auto object-cover max-h-[450px]"
+                        format="webp"
+                />
+            </div>
+
+            <!-- Case Details -->
+            <article class="prose prose-lg dark:prose-invert max-w-none" data-animate="fade-in" data-delay="200">
+                <div class="mb-10">
+                    <h2 class="text-xl font-semibold text-gray-900 dark:text-white mb-3 flex items-center">
+                        <span class="w-1.5 h-6 bg-primary-500 rounded-full mr-3"></span>
+                        Ситуація
+                    </h2>
+                    <p class="text-gray-600 dark:text-gray-300 leading-relaxed pl-5">{situation}</p>
+                </div>
+
+                <div class="mb-10">
+                    <h2 class="text-xl font-semibold text-gray-900 dark:text-white mb-3 flex items-center">
+                        <span class="w-1.5 h-6 bg-accent-500 rounded-full mr-3"></span>
+                        Наші дії
+                    </h2>
+                    <p class="text-gray-600 dark:text-gray-300 leading-relaxed pl-5">{actions}</p>
+                </div>
+
+                <div class="mb-10 p-6 bg-green-50 dark:bg-green-900/20 rounded-lg border-l-4 border-green-500">
+                    <h2 class="text-xl font-semibold text-gray-900 dark:text-white mb-3">
+                        Результат
+                    </h2>
+                    <p class="text-gray-700 dark:text-gray-200 leading-relaxed">{result}</p>
+                </div>
+            </article>
+
+            <!-- Back Link -->
+            <div class="mt-12 pt-8 border-t border-gray-200 dark:border-gray-700" data-animate="fade-in"
+                 data-delay="300">
+                <a
+                        href="/case-study"
+                        class="inline-flex items-center text-gray-600 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
+                >
+                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                              d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+                    </svg>
+                    Всі кейси
+                </a>
+            </div>
+
+            <!-- CTA Section -->
+            <div class="mt-16">
+                <div class="bg-gradient-to-br from-primary-50 to-accent-50 dark:from-primary-900/20 dark:to-accent-900/20 rounded-2xl p-8 border-2 border-accent-200 dark:border-accent-800 text-center"
+                     data-animate="fade-in-up" data-delay="400">
+                    <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-4">Маєте схожу ситуацію?</h3>
+                    <p class="text-gray-600 dark:text-gray-300 mb-8 max-w-xl mx-auto">
+                        Наша команда готова допомогти вам у будь-якому правовому питанні. Зв'яжіться з нами для
+                        отримання професійної консультації.
+                    </p>
+                    <div class="flex flex-wrap gap-4 justify-center">
+                        <a href="/contact" class="btn-primary">
+                            Отримати консультацію
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2" viewBox="0 0 20 20"
+                                 fill="currentColor">
+                                <path fill-rule="evenodd"
+                                      d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z"
+                                      clip-rule="evenodd"/>
+                            </svg>
+                        </a>
+                        <a href="/pricing" class="btn-ghost">
+                            Переглянути тарифи
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

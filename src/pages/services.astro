@@ -1,0 +1,186 @@
+---
+import { Image } from 'astro:assets';
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import HeroSection from '../components/HeroSection.astro';
+
+import militaryImg from '../assets/services/military.png';
+import adminImg from '../assets/services/admin.png';
+import citizenImg from '../assets/services/citizen.png';
+import familyImg from '../assets/services/family.png';
+import landImg from '../assets/services/land.png';
+import houseImg from '../assets/services/house.png';
+
+const services = [
+    {
+        title: "Військове право",
+        image: militaryImg,
+        items: [
+            "Оскарження штрафу ТЦК та СП",
+            "Порушення правил військового обліку (розшук ТЦК та СП)",
+            "Оскарження висновку ВЛК",
+            "Відстрочка від мобілізації (підготовка заяви про відстрочку до ТЦК та СП)",
+            "Перетин державного кордону",
+            "Звільнення з військової служби (підготовка рапорту на звільнення)",
+            "Переведення в іншу військову частину",
+            "Виплата 1 млн грн за підписання контракту 18-24 років",
+            "Виплати по пораненню",
+            "Порядок бронювання",
+            "ОГД 15 млн за загиблого військовослужбовця",
+            "Пенсії та соціальні виплати для військовослужбовців",
+            "ОГД у разі встановлення групи інвалідності",
+            "Отримання статусу УБД",
+            "Індексація грошового забезпечення військовослужбовців"
+        ]
+    },
+    {
+        title: "Адміністративне право",
+        image: adminImg,
+        items: [
+            "Відповідальність за порушення ПДР (штрафи, позбавлення права керування транспортними засобами, громадські роботи, адміністративний арешт)",
+            "Підготовка позовних заяв про скасування постанови: за порушення ПДР, правил військово обліку, правил перетину державного кордону",
+            "Підготовка пояснень за ч. 1 ст. 130 КУпАП (керування транспортними засобами в стані сп'яніння) та за ч. 1 ст. 124 КУпАП (ДТП)",
+            "Консультації, щодо повноважень співробітників поліції, ТЦК, прикордонників та Уктрансбезпеки",
+            "Оскарження бездіяльності органів державної влади (наприклад, держслужбовець не реагує на заяву)"
+        ]
+    },
+    {
+        title: "Цивільне право",
+        image: citizenImg,
+        items: [
+            "Кредитна заборгованість",
+            "Заборгованість за комунальні послуги",
+            "Відшкодування моральної шкоди",
+            "Захист прав споживачів (повернення або обмін товару, відшкодування матеріальних виплат від продавця)",
+            "Спадкові спори (відкриття спадщини, спадкування за заповітом, розподіл спадкового майна, оскарження заповітів)",
+            "Визнання права власності на рухоме і нерухоме майно",
+            "Страхове відшкодування"
+        ]
+    },
+    {
+        title: "Сімейне право",
+        image: familyImg,
+        items: [
+            "Розірвання шлюбу",
+            "Поділ майна",
+            "Стягнення аліментів",
+            "Визначення місце проживання дитини з одним із батьків",
+            "Позбавлення батьківських прав",
+            "Усиновлення, опіка, встановлення батьківства"
+        ]
+    },
+    {
+        title: "Земельне право",
+        image: landImg,
+        items: [
+            "Консультації, щодо оформлення документів права власності на земельну ділянку, кіпівля-продаж, виділення частки земельної ділянки в натурі",
+            "Визнання права власності на земельну ділянку, визнання права постійного користування земельною ділянкою",
+            "Укладання та розірвання договорів оренди земельної ділянки",
+            "Усунення перешкод в користуванні земельною ділянкою"
+        ]
+    },
+    {
+        title: "Житлове право",
+        image: houseImg,
+        items: [
+            "Оскарження відмови в реєстрації місця проживання",
+            "Стягнення збитків внаслідок затоплення чи пожежі",
+            "Зняття арешту з житла",
+            "Визнання права власності на житло",
+            "Розірвання договору дарування, купівлі-продажу, оренди житла"
+        ]
+    }
+];
+---
+
+<Layout title="Наші послуги">
+    <Header/>
+    <main>
+        <HeroSection
+                title="Ми працюємо з наступними сферами права"
+                description="До Вашої уваги повний перелік послуг, які надає компанія «Юрист На Плаву»."
+                wideDescription={true}
+                compact={true}
+        />
+
+        <section class="section-after-hero bg-white dark:bg-gray-800">
+            <div class="container-custom">
+                <div class="grid md:grid-cols-2 gap-8 mb-16">
+                    {services.map((service, index) => (
+                        <div
+                            class="service-card card p-8 border-2 hover:shadow-xl transition-all duration-300"
+                            data-animate="fade-in-up"
+                            data-delay={index * 100}
+                        >
+                            <div class="flex items-start gap-4 mb-6">
+                                <Image
+                                    src={service.image}
+                                    alt={service.title}
+                                    class="w-14 h-14 rounded-xl object-cover flex-shrink-0"
+                                    width={56}
+                                    height={56}
+                                    format="webp"
+                                />
+                                <h3 class="text-2xl font-bold text-gray-900 dark:text-white pt-2">{service.title}</h3>
+                            </div>
+
+                            <ul class="space-y-3">
+                                {service.items.map((item) => (
+                                    <li class="flex items-start gap-3 text-gray-600 dark:text-gray-300">
+                                        <svg class="w-5 h-5 text-accent-500 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                                        </svg>
+                                        <span>{item}</span>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+                    ))}
+                </div>
+
+                <div class="text-center mt-16 max-w-2xl mx-auto">
+                    <div class="bg-gradient-to-br from-primary-50 to-accent-50 dark:from-primary-900/20 dark:to-accent-900/20 rounded-2xl p-8 border-2 border-accent-200 dark:border-accent-800">
+                        <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-4">Готові розпочати?</h3>
+                        <p class="text-gray-600 dark:text-gray-300 mb-8">
+                            Наша команда готова допомогти вам у будь-якому правовому питанні. Зв'яжіться з нами для отримання професійної консультації.
+                        </p>
+                        <div class="flex flex-wrap gap-4 justify-center">
+                            <a href="/contact" class="btn-primary">
+                                Отримати консультацію
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+                                </svg>
+                            </a>
+                            <a href="/pricing" class="btn-ghost">
+                                Переглянути тарифи
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <Footer/>
+</Layout>
+
+<style>
+    .service-card {
+        border-color: var(--color-accent-200);
+        background: linear-gradient(to bottom right, rgba(255, 255, 255, 0.9), rgba(249, 250, 251, 0.9));
+    }
+
+    :global(.dark) .service-card {
+        border-color: var(--color-accent-800);
+        background: var(--color-secondary-900);
+    }
+
+    .service-card:hover {
+        border-color: var(--color-accent-500);
+        transform: translateY(-4px);
+    }
+
+    :global(.dark) .service-card:hover {
+        border-color: var(--color-accent-600);
+    }
+</style> 

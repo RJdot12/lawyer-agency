@@ -1,0 +1,120 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import HeroSection from '../components/HeroSection.astro';
+---
+
+<Layout title="Поширені запитання">
+    <Header/>
+    <main>
+        <HeroSection
+                title="Найчастіше питають"
+                highlightText="питають"
+                description="Тут Ви знайдете відповіді на найпопулярніші запитання про компанію «Юрист На Плаву» та наші послуги."
+                compact={true}
+        />
+
+        <section class="py-16 bg-white dark:bg-gray-800">
+            <div class="container-custom">
+                <div class="max-w-4xl mx-auto">
+                    <div id="general" class="mb-16">
+                        <div class="space-y-6">
+                            <div class="card p-6 border border-gray-200 dark:border-gray-700">
+                                <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-3">З яких питань
+                                    надаєте юридичну допомогу?</h3>
+                                <p class="text-gray-600 dark:text-gray-300">
+                                    Ми допомагаємо виключно у тих сферах права, які визначені в розділі “Послуги”.
+                                </p>
+                            </div>
+
+                            <div class="card p-6 border border-gray-200 dark:border-gray-700">
+                                <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-3">В яких форматах
+                                    здійснюються консультації?</h3>
+                                <p class="text-gray-600 dark:text-gray-300">
+                                    Консультації доступні телефоном, електронною поштою, або через онлайн чат у
+                                    месенджерах (Telegram, Viber, WhatsApp, Facebook Messenger).
+                                </p>
+                            </div>
+
+                            <div class="card p-6 border border-gray-200 dark:border-gray-700">
+                                <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-3">Чому вигідніше
+                                    оформити підписку, ніж звертатися до адвоката/юриста разово?</h3>
+                                <p class="text-gray-600 dark:text-gray-300">
+                                    Середня вартість одноразової консультації в адвоката або юриста – близько 1000 грн.
+                                    З нашою підпискою Ви отримуєте цілий рік послуг за значно нижчою ціною.
+                                </p>
+                            </div>
+
+                            <div class="card p-6 border border-gray-200 dark:border-gray-700">
+                                <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-3">Скільки
+                                    консультацій входить у підписку?</h3>
+                                <p class="text-gray-600 dark:text-gray-300">
+                                    Кількість консультацій не обмежена – Ви звертаєтеся стільки разів, скільки Вам
+                                    потрібно.
+                                </p>
+                            </div>
+
+                            <div class="card p-6 border border-gray-200 dark:border-gray-700">
+                                <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-3">Чи можна звернутися у вихідні або святкові дні?</h3>
+                                <p class="text-gray-600 dark:text-gray-300">
+                                    Так, ми працюємо у вихідні та святкові дні, аби завжди бути на зв’язку з нашими клієнтами.
+                                </p>
+                            </div>
+
+                            <div class="card p-6 border border-gray-200 dark:border-gray-700">
+                                <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-3">Чи можу я отримати письмову відповідь на своє питання?</h3>
+                                <p class="text-gray-600 dark:text-gray-300">
+                                    Так, для Вашої зручності надамо письмовий висновок юриста.
+                                </p>
+                            </div>
+
+                            <div class="card p-6 border border-gray-200 dark:border-gray-700">
+                                <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-3">Чи допомагаєте в судових справах?</h3>
+                                <p class="text-gray-600 dark:text-gray-300">
+                                    Так, ми можемо підготувати документи для суду.
+                                </p>
+                            </div>
+
+                            <div class="card p-6 border border-gray-200 dark:border-gray-700">
+                                <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-3">Чи розголошується якась моя особиста інформація, або інформація щодо/з мого звернення?</h3>
+                                <p class="text-gray-600 dark:text-gray-300">
+                                    Усі послуги є повністю приватними. Ми гарантуємо конфіденційність Ваших персональних даних та змісту Ваших звернень.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="text-center mt-16 max-w-2xl mx-auto">
+                        <div class="bg-gradient-to-br from-primary-50 to-accent-50 dark:from-primary-900/20 dark:to-accent-900/20 rounded-2xl p-8 border-2 border-accent-200 dark:border-accent-800">
+                            <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-4">Лишились питання?</h3>
+                            <p class="text-gray-600 dark:text-gray-300 mb-8">
+                                Наша команда готова допомогти вам у будь-якому правовому питанні. Зв'яжіться з нами для отримання професійної консультації.
+                            </p>
+                            <div class="flex flex-wrap gap-4 justify-center">
+                                <a href="/contact" class="btn-primary">
+                                    Отримати консультацію
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2" viewBox="0 0 20 20" fill="currentColor">
+                                        <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+                                    </svg>
+                                </a>
+                                <a href="/pricing" class="btn-ghost">
+                                    Переглянути тарифи
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <Footer/>
+</Layout>
+
+<style>
+  /* Make FAQ question card borders golden to match highlighted title text */
+  #general .card {
+    border-color: var(--color-accent-500);
+  }
+</style>
+

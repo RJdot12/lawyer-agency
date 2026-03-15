@@ -1,0 +1,112 @@
+---
+import '../styles/global.css';
+import '../styles/transitions.css';
+import { ClientRouter } from 'astro:transitions';
+import TopBanner from '../components/TopBanner.astro';
+import { bannerConfig } from '../config/banner';
+
+export interface Props {
+  title: string;
+  description?: string;
+}
+
+const {
+  title,
+  description = "Modern SaaS landing page template with responsive design and modular sections."
+} = Astro.props;
+
+const bannerEnabled = bannerConfig.enabled;
+---
+
+<!doctype html>
+<html lang="en" class={bannerEnabled ? 'has-banner' : ''} x-data="{ darkMode: localStorage.getItem('darkMode') === 'true' }" x-init="$watch('darkMode', val => localStorage.setItem('darkMode', val))" :class="{ 'dark': darkMode }">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="description" content={description} />
+    <title>{title}</title>
+    <script>
+      (function() {
+        try {
+          var stored = localStorage.getItem('darkMode');
+          var prefers = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var enable = stored === 'true' || (stored === null && prefers);
+          if (enable) {
+            document.documentElement.classList.add('dark');
+          } else {
+            document.documentElement.classList.remove('dark');
+          }
+        } catch (e) {}
+      })();
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Lexend:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <ClientRouter />
+  </head>
+  <body class="antialiased bg-white dark:bg-secondary-950 text-secondary-900 dark:text-secondary-100 transition-colors duration-300">
+    <TopBanner />
+    <div id="page-wrapper" class="page-transition-wrapper">
+      <slot />
+    </div>
+    <script>
+      (() => {
+        const html = document.documentElement;
+
+        const applyInitial = () => {
+          try {
+            if (localStorage.getItem('darkMode') === null) {
+              localStorage.setItem('darkMode', html.classList.contains('dark') ? 'true' : 'false');
+            }
+          } catch (e) {}
+        };
+
+        const setIcons = (btn) => {
+          if (!btn) return;
+          const isDark = html.classList.contains('dark');
+          btn.setAttribute('aria-pressed', String(isDark));
+          const sun = btn.querySelector('[data-icon="sun"]');
+          const moon = btn.querySelector('[data-icon="moon"]');
+          if (sun && moon) {
+            sun.classList.toggle('hidden', isDark);
+            moon.classList.toggle('hidden', !isDark);
+          }
+        };
+
+        const bindThemeToggle = () => {
+          const btn = document.getElementById('theme-toggle');
+          if (!btn) return;
+          if (btn.dataset.bound === 'true') {
+            setIcons(btn);
+            return;
+          }
+          btn.dataset.bound = 'true';
+          setIcons(btn);
+          btn.addEventListener('click', () => {
+            const nowDark = html.classList.toggle('dark');
+            try { localStorage.setItem('darkMode', nowDark ? 'true' : 'false'); } catch (e) {}
+            setIcons(btn);
+          });
+        };
+
+        const handlePageLoad = () => {
+          const pageWrapper = document.getElementById('page-wrapper');
+          if (pageWrapper) pageWrapper.classList.add('page-loaded');
+          bindThemeToggle();
+        };
+
+        const handleBeforeSwap = () => {
+          const pageWrapper = document.getElementById('page-wrapper');
+          if (pageWrapper) pageWrapper.classList.remove('page-loaded');
+        };
+
+        applyInitial();
+        document.addEventListener('astro:page-load', handlePageLoad);
+        document.addEventListener('astro:before-swap', handleBeforeSwap);
+      })();
+    </script>
+    <script src="../scripts/transitions.js"></script>
+  </body>
+</html>

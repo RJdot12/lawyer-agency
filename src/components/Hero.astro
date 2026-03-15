@@ -1,0 +1,101 @@
+---
+import { Image } from 'astro:assets';
+import heroBg from '../assets/hero-bg.jpeg';
+---
+<section
+        class="relative isolate min-h-[100svh] md:min-h-screen flex items-center overflow-hidden hero-section pt-28 md:pt-36 pb-20">
+    <Image src={heroBg} alt="Фонове зображення героя" class="absolute inset-0 w-full h-full object-cover -z-30" format="webp" loading="eager" />
+    <div class="absolute inset-0 -z-20 bg-gradient-to-b from-black/60 via-black/40 to-black/70"></div>
+    <div aria-hidden="true"
+         class="absolute -top-24 -right-24 w-[520px] h-[520px] rounded-full bg-accent-500/25 blur-3xl -z-10"></div>
+
+    <div class="container-custom relative z-10">
+        <div class="grid md:grid-cols-2 gap-10 lg:gap-16 items-center">
+            <div class="slide-up" transition:animate="slide">
+        <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/15 text-white/90 backdrop-blur-sm ring-1 ring-white/20 mb-5 text-sm">
+          Вирішимо Ваші правові спори
+        </span>
+                <h1 class="mb-6 text-white leading-tight text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl">
+                    <span class="whitespace-nowrap">Юридична компанія</span> <span class="text-accent-400 whitespace-nowrap">«Юрист На Плаву»</span>
+                </h1>
+                <p class="text-lg md:text-xl text-white/90 mb-8 max-w-xl">
+                    Компанія <b>«Юрист На Плаву»</b> ставить на меті зробити юриспруденцію зрозумілою та справді
+                    корисною для кожного. Ми підвищуємо рівень правової обізнаності в Україні, роблячи якісні юридичні
+                    консультації доступними.
+                </p>
+                <div class="flex flex-wrap gap-4">
+                    <a href="/contact"
+                       class="btn-primary px-7 py-3 text-base md:text-lg rounded-xl shadow-xl shadow-accent-500/20"
+                       aria-label="Отримати консультацію">
+                        Отримати консультацію
+                    </a>
+                    <a href="/services"
+                       class="btn-outline px-7 py-3 text-base md:text-lg rounded-xl backdrop-blur-sm bg-white/10 hover:bg-white/15 text-white">
+                        Наші послуги
+                    </a>
+                </div>
+            </div>
+
+            <div class="hidden md:block">
+                <div class="max-w-md ml-auto p-6 rounded-2xl border border-white/20 bg-white/10 dark:bg-secondary-900/60 backdrop-blur-lg shadow-2xl space-y-5">
+                    <div class="flex items-start gap-3">
+                        <svg class="w-5 h-5 shrink-0 text-accent-400 mt-1.5" viewBox="0 0 24 24" fill="none"
+                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                             aria-hidden="true">
+                            <path d="M9 12l2 2 4-4"></path>
+                            <circle cx="12" cy="12" r="9"></circle>
+                        </svg>
+                        <div>
+                            <p class="font-semibold text-white">Консультуємо в зручних форматах та з багатьох питань</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <svg class="w-5 h-5 text-accent-400 mt-1.5" viewBox="0 0 24 24" fill="none"
+                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                             aria-hidden="true">
+                            <path d="M9 12l2 2 4-4"></path>
+                            <circle cx="12" cy="12" r="9"></circle>
+                        </svg>
+                        <div>
+                            <p class="font-semibold text-white">Працюємо в вихідні та святкові дні</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <svg class="w-5 h-5 text-accent-400 mt-1.5" viewBox="0 0 24 24" fill="none"
+                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                             aria-hidden="true">
+                            <path d="M9 12l2 2 4-4"></path>
+                            <circle cx="12" cy="12" r="9"></circle>
+                        </svg>
+                        <div>
+                            <p class="font-semibold text-white">Готуємо документи на замовлення</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <svg class="w-5 h-5 text-accent-400 mt-1.5" viewBox="0 0 24 24" fill="none"
+                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                             aria-hidden="true">
+                            <path d="M9 12l2 2 4-4"></path>
+                            <circle cx="12" cy="12" r="9"></circle>
+                        </svg>
+                        <div>
+                            <p class="font-semibold text-white">Оплата послуг лише раз на рік</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</section>
+
+<style>
+    @keyframes bounceY {
+        0%, 100% {
+            transform: translate(-50%, 0);
+        }
+        50% {
+            transform: translate(-50%, -6px);
+        }
+    }
+</style>

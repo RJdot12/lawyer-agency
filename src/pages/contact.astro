@@ -1,0 +1,21 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import ContactForm from '../components/Contact.astro';
+import Footer from '../components/Footer.astro';
+import HeroSection from '../components/HeroSection.astro';
+---
+
+<Layout title="Контакти">
+  <Header />
+  <main>
+    <HeroSection
+      title="Давайте поспілкуємось"
+      highlightText="поспілкуємось"
+      description="Маєте питання/пропозицію до нас? Зателефонуйте або напишіть, і ми відповімо Вам якомога швидше."
+      compact={true}
+    />
+    <ContactForm />
+  </main>
+  <Footer />
+</Layout> 

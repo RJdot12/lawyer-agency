@@ -1,0 +1,65 @@
+---
+import { bannerConfig } from '../config/banner';
+
+const { enabled, text } = bannerConfig;
+---
+
+{enabled && (
+  <div
+    id="top-banner"
+    class="fixed top-0 z-[60] w-full bg-gradient-to-r from-primary-700 via-primary-600 to-primary-700"
+    role="banner"
+    aria-label="Оголошення"
+  >
+    <div class="container-custom">
+      <p class="py-2.5 text-center text-sm font-medium text-white/95 tracking-wide">
+        <span class="inline-flex items-center gap-2">
+          <span class="hidden sm:inline-block w-1.5 h-1.5 rounded-full bg-accent-400 animate-pulse"></span>
+          <span>{text}</span>
+          <span class="hidden sm:inline-block w-1.5 h-1.5 rounded-full bg-accent-400 animate-pulse"></span>
+        </span>
+      </p>
+    </div>
+  </div>
+)}
+
+<style>
+  #top-banner {
+    animation: slideDown 0.4s ease-out;
+  }
+
+  @keyframes slideDown {
+    from {
+      transform: translateY(-100%);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+
+  /* Subtle shimmer effect */
+  #top-banner::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0.03) 50%,
+      transparent 100%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 8s ease-in-out infinite;
+  }
+
+  @keyframes shimmer {
+    0%, 100% {
+      background-position: -200% 0;
+    }
+    50% {
+      background-position: 200% 0;
+    }
+  }
+</style>

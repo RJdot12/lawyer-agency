@@ -1,0 +1,43 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import HeroSection from '../../components/HeroSection.astro';
+import CaseDetail from '../../components/CaseDetail.astro';
+
+export async function getStaticPaths() {
+  const cases = await getCollection('cases');
+  return cases.map((caseEntry) => ({
+    params: { slug: caseEntry.id.replace('.md', '') },
+    props: { caseEntry },
+  }));
+}
+
+const { caseEntry } = Astro.props;
+const { title, category, image, imageAlt, caseNumber, courtLink, situation, actions, result } = caseEntry.data;
+---
+
+<Layout title={`${title} - Юрист На Плаву`}>
+  <Header />
+  <main>
+    <HeroSection
+      title={title}
+      highlightText={title.split(' ')[0]}
+      description={category}
+    />
+
+    <CaseDetail
+      title={title}
+      caseNumber={caseNumber}
+      category={category}
+      image={image}
+      imageAlt={imageAlt}
+      courtLink={courtLink}
+      situation={situation}
+      actions={actions}
+      result={result}
+    />
+  </main>
+  <Footer />
+</Layout>
