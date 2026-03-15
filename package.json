@@ -17,11 +17,15 @@
     "preview": "astro build && astro preview",
     "astro": "astro"
   },
+  "pnpm": {
+    "onlyBuiltDependencies": ["sharp", "@tailwindcss/oxide", "esbuild"]
+  },
   "dependencies": {
     "@astrojs/alpinejs": "^0.4.8",
     "@tailwindcss/vite": "^4.1.11",
     "alpinejs": "^3.14.9",
     "astro": "^5.10.1",
+    "sharp": "^0.34.5",
     "tailwindcss": "^4.1.11"
   }
 }
