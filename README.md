@@ -1,117 +1,49 @@
-![CodeRabbit Pull Request Reviews](https://img.shields.io/coderabbit/prs/github/larry-xue/astro-sassify-template?utm_source=oss&utm_medium=github&utm_campaign=larry-xue%2Fastro-sassify-template&labelColor=171717&color=FF570A&link=https%3A%2F%2Fcoderabbit.ai&label=CodeRabbit+Reviews)
+# Lawyer Agency — Website Template
 
-# Astro Sassify Template
+A modern, responsive website template built for law firms and legal professionals. Designed to convey trust, professionalism, and authority.
 
-A modern, responsive Astro template with Tailwind CSS and Alpine.js integration. This template provides a solid foundation for building fast, SEO-friendly websites with a clean design system.
+## Tech Stack
 
-## 🚀 Features
+- [Astro](https://astro.build/) — static site generator
+- [Tailwind CSS](https://tailwindcss.com/) — utility-first styling
+- [Alpine.js](https://alpinejs.dev/) — lightweight interactivity
 
-- [Astro](https://astro.build/) - The web framework for content-driven websites
-- [Tailwind CSS](https://tailwindcss.com/) - Utility-first CSS framework
-- [Alpine.js](https://alpinejs.dev/) - Lightweight JavaScript framework for interactivity
-- Responsive design system with custom color palette
-- Dark mode support
+## Features
+
+- Fully responsive layout (mobile, tablet, desktop)
+- SEO-optimized structure
+- Fast performance (static HTML output)
+- Contact form ready
 - Smooth page transitions
-- Performance optimized
-- SEO-friendly
+- Dark mode support
+- Clean, professional design
 
-## 📦 Project Structure
-
-```text
-/
-├── public/             # Static assets
-│   └── favicon.svg
-├── src/
-│   ├── assets/         # Images and other assets
-│   ├── components/     # Reusable UI components
-│   ├── layouts/        # Page layouts
-│   ├── pages/          # Page routes
-│   ├── scripts/        # JavaScript utilities
-│   └── styles/         # Global styles
-│       ├── global.css
-│       └── transitions.css
-├── astro.config.mjs    # Astro configuration
-└── package.json        # Project dependencies
-```
-
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 🎨 Customization
-
-### Colors
-
-The template includes a custom color palette defined in `src/styles/global.css`:
-
-- Primary: Purple-based color scheme
-- Secondary: Slate-based color scheme
-- Accent: Lime-based color scheme
-- Warning: Yellow-based color scheme
-
-You can customize these colors by editing the `src/styles/global.css` file.
-
-### Typography
-
-The template uses the following font families:
-
-- Sans: Inter (with system fallbacks)
-- Display: Lexend (with system fallbacks)
-
-### Animations
-
-Custom animations are included:
-- Fade In
-- Slide Up
-- Slide Down
-
-## 🚀 Getting Started
-
-There are two ways to use this template:
-
-### Option 1: Using Astro CLI (Recommended)
-
-Create a project directly with Astro's official CLI tool:
+## Getting Started
 
 ```bash
-npm create astro@latest -- --template larry-xue/astro-sassify-template
+npm install
+npm run dev
 ```
 
-### Option 2: Manual Clone
+Open `http://localhost:4321` in your browser.
 
-1. Clone this repository
-   ```bash
-   git clone https://github.com/larry-xue/astro-sassify-template.git my-project
-   cd my-project
-   ```
+## Commands
 
-2. Install dependencies
-   ```bash
-   npm install
-   ```
+| Command           | Action                                  |
+| :---------------- | :-------------------------------------- |
+| `npm install`     | Install dependencies                    |
+| `npm run dev`     | Start dev server at `localhost:4321`    |
+| `npm run build`   | Build production site to `./dist/`     |
+| `npm run preview` | Preview production build locally       |
 
-3. Start the development server
-   ```bash
-   npm run dev
-   ```
+## Project Structure
 
-4. Visit `http://localhost:4321` in your browser to see your site
-
-## 📝 License
-
-MIT
-
-## 👀 Learn More
-
-- [Astro Documentation](https://docs.astro.build)
-- [Tailwind CSS Documentation](https://tailwindcss.com/docs)
-- [Alpine.js Documentation](https://alpinejs.dev/start-here)
+```
+src/
+├── assets/        # Images and media
+├── components/    # Reusable UI components
+├── layouts/       # Page layouts
+├── pages/         # Routes
+├── scripts/       # JS utilities
+└── styles/        # Global styles
+```
