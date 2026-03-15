@@ -1,6 +1,6 @@
 # Lawyer Agency — Website Template
 
-A modern, responsive website template built for law firms and legal professionals. Designed to convey trust, professionalism, and authority.
+A modern, responsive website built for law firm "Yurist na plavu".
 
 ## Tech Stack
 
