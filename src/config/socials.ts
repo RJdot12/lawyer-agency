@@ -5,6 +5,7 @@ export const socialLinks = {
   whatsapp: "https://wa.me/qr/J6534YSOWGJRC1",
   facebook: "https://www.facebook.com/profile.php?id=61585780606036",
   tiktok: "https://www.tiktok.com/@juristnaplavu",
+  youtube: "https://www.youtube.com/@juristnaplavu",
 };
 
 export const contactInfo = {
