@@ -8,7 +8,7 @@ export const bannerConfig = {
   /**
    * Enable or disable the banner site-wide
    */
-  enabled: true,
+  enabled: false,
 
   /**
    * The text to display in the banner
