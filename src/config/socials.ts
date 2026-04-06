@@ -1,5 +1,5 @@
 export const socialLinks = {
-  telegram: "https://t.me/+HhDfTYTFw8szNjU6",
+  telegram: "https://t.me/juristnaplavu",
   instagram: "https://www.instagram.com/juristnaplavu12/",
   viber: "https://connect.viber.com/business/1107b2cc-eccf-11f0-ad17-1222c917034a",
   whatsapp: "https://wa.me/qr/J6534YSOWGJRC1",
