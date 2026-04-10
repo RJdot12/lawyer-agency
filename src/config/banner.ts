@@ -8,11 +8,11 @@ export const bannerConfig = {
   /**
    * Enable or disable the banner site-wide
    */
-  enabled: false,
+  enabled: true,
 
   /**
    * The text to display in the banner
    * Keep it concise - ideally one line
    */
-  text: "До Вашої уваги! У нас з'явився новий сервіс. Дізнайтеся більше на сторінці Підписки.",
+  text: "Ми функціонуємо в звичному графіку! Пн - Нд з 9:00 до 18:00. Працюємо в святкові дні!",
 };
